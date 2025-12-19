@@ -209,9 +209,9 @@ const App: React.FC = () => {
 
           {/* CENTER TITLE - Ethereal Silver Script */}
           {/* Layer: z-0. Adjusted sizes for 9:20 aspect ratio consistency */}
-          <div className={`absolute top-[5%] left-0 w-full flex justify-center pointer-events-none z-0 transition-opacity duration-700 ${isSignatureOpen ? 'opacity-0' : 'opacity-100'}`}>
+          <div className={`absolute top-[2%] left-0 w-full flex justify-center pointer-events-none z-0 transition-opacity duration-700 ${isSignatureOpen ? 'opacity-0' : 'opacity-100'}`}>
             <h1 
-                className={`${devConfig.titleFont} text-6xl md:text-7xl text-center leading-[1.5] py-10`}
+                className={`${devConfig.titleFont} text-6xl md:text-7xl text-center leading-[1] py-10`}
                 style={{
                     // Silver Metallic Gradient
                     background: 'linear-gradient(to bottom, #ffffff 20%, #e8e8e8 50%, #b0b0b0 90%)',
