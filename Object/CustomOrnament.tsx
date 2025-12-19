@@ -29,8 +29,7 @@ const CustomOrnament: React.FC<CustomOrnamentProps> = ({ item, mixFactor }) => {
   const vecPos = useMemo(() => new THREE.Vector3(), []);
   const vecScale = useMemo(() => new THREE.Vector3(), []);
 
-  // Load the external GLB model
-  // Note: Path corresponds to public/models/ball.glb
+  // Load the external GLB model - errors will be caught by ErrorBoundary
   const { scene } = useGLTF(BALL_MODEL_PATH);
   
   // Clone the scene so each ornament instance is unique

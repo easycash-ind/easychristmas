@@ -372,9 +372,26 @@ const Experience: React.FC<ExperienceProps> = (props) => {
       // OPTIMIZATION: Tighten near/far planes to increase depth buffer precision on mobile.
       // 5-80 covers the tree nicely (centered at 0, camera at 32).
       camera={{ position: [0, 0, 32], fov: 45, near: 5, far: 80 }}
-      gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.0 }}
+      gl={{ 
+        antialias: false, 
+        toneMapping: THREE.ACESFilmicToneMapping, 
+        toneMappingExposure: 1.0,
+        onContextLost: () => {
+          console.warn('WebGL context lost - this may be recoverable');
+        }
+      }}
       shadows
       style={{ touchAction: 'none' }}
+      onCreated={(state) => {
+        // Handle WebGL context errors
+        state.gl.domElement.addEventListener('webglcontextlost', (e) => {
+          e.preventDefault();
+          console.warn('WebGL context lost');
+        });
+        state.gl.domElement.addEventListener('webglcontextrestored', () => {
+          console.log('WebGL context restored');
+        });
+      }}
     >
       <SceneContent {...props} />
     </Canvas>

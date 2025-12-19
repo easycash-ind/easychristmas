@@ -16,7 +16,7 @@ const TopStar: React.FC<TopStarProps> = ({ mixFactor, scale = 11 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const currentMixRef = useRef(1);
   
-  // Load GLB Model
+  // Load GLB Model - errors will be caught by ErrorBoundary
   const { scene } = useGLTF(STAR_MODEL_PATH);
   const clone = useMemo(() => scene.clone(), [scene]);
 

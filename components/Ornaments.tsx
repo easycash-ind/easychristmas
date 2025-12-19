@@ -489,7 +489,9 @@ const UserPhotoOrnament: React.FC<{
                 // This validates existence and avoids some cross-origin pitfalls with direct TextureLoader 
                 // on certain development servers or when switching protocols.
                 const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                if (!res.ok) {
+                    throw new Error(`HTTP error ${res.status}`);
+                }
                 
                 const blob = await res.blob();
                 if (!isMounted) return;
@@ -518,10 +520,11 @@ const UserPhotoOrnament: React.FC<{
                     }
                 );
             } catch (e) {
+                // Silently handle errors - don't throw to prevent React error #310
                 console.warn(`Failed to fetch photo: ${url}`, e);
-                // Try fallback to direct load if fetch failed (e.g. data URI or special proto)
-                // If it's a blob url passed in, fetch works. If it's a path, fetch works.
-                if (isMounted) setError(true);
+                if (isMounted) {
+                    setError(true);
+                }
             }
         };
 
