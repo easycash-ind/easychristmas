@@ -10,12 +10,14 @@ interface TopStarProps {
   scale?: number;
 }
 
+const STAR_MODEL_PATH = `${import.meta.env.BASE_URL}models/Star.glb`;
+
 const TopStar: React.FC<TopStarProps> = ({ mixFactor, scale = 11 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const currentMixRef = useRef(1);
   
   // Load GLB Model
-  const { scene } = useGLTF('/models/Star.glb');
+  const { scene } = useGLTF(STAR_MODEL_PATH);
   const clone = useMemo(() => scene.clone(), [scene]);
 
   // Apply Gold Material to match previous aesthetic
