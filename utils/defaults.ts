@@ -20,14 +20,15 @@ export const SCENE_DEFAULTS = {
 
 // Default images displayed before user uploads their own.
 // Using local project assets located in public/defaultImg/
-// Updated to relative paths (no leading slash) to support base-path deployments better
+// Updated to use BASE_URL for GitHub Pages subpath support
+const BASE_URL = import.meta.env.BASE_URL || '/';
 export const DEFAULT_IMAGES = [
-    'defaultImg/1.jpg',
-    'defaultImg/2.jpg',
-    'defaultImg/3.jpg',
-    'defaultImg/4.jpg',
-    'defaultImg/5.jpg',
-    'defaultImg/6.jpg',
-    'defaultImg/7.jpg',
-    'defaultImg/8.jpg'
+    `${BASE_URL}defaultImg/1.jpg`,
+    `${BASE_URL}defaultImg/2.jpg`,
+    `${BASE_URL}defaultImg/3.jpg`,
+    `${BASE_URL}defaultImg/4.jpg`,
+    `${BASE_URL}defaultImg/5.jpg`,
+    `${BASE_URL}defaultImg/6.jpg`,
+    `${BASE_URL}defaultImg/7.jpg`,
+    `${BASE_URL}defaultImg/8.jpg`
 ];

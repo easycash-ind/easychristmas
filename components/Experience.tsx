@@ -285,7 +285,10 @@ const SceneContent: React.FC<ExperienceProps> = ({ mixFactor, colors, inputRef, 
       
       <Environment 
         files={HDRI_PATH}
-        background={false} 
+        background={false}
+        onError={(error) => {
+          console.warn('Failed to load HDRI environment:', error);
+        }}
       />
       <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
 
