@@ -185,18 +185,21 @@ const GestureController: React.FC<GestureControllerProps> = ({ onGesture, isGuiV
   }, [model, loading, runDetection]);
 
   // Use absolute instead of fixed to stay inside the app container
-  const boxStyle = "w-40 h-52 md:w-60 md:h-44 rounded-lg border-[#d0d0d0] bg-black/90 border overflow-hidden";
+  // Width set to 32% of screen, maintaining aspect ratio
+  // On mobile: 32% width with 10/13 aspect ratio
+  // On PC (md): Use fixed width to ensure proper display in device frame
+  const boxStyle = "rounded-lg border-[#d0d0d0] bg-black/90 border overflow-hidden";
 
   return (
     <div 
-      className={`absolute right-4 z-50 transition-all duration-500 ease-in-out ${
+      className={`absolute right-4 z-50 transition-all duration-500 ease-in-out w-[32%] md:w-[140px] ${
         isGuiVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
       }`}
       style={{ 
         bottom: 'max(1rem, calc(1rem + env(safe-area-inset-bottom)))'
       }}
     >
-      <div className={`relative ${boxStyle}`}>
+      <div className={`relative w-full ${boxStyle}`} style={{ aspectRatio: '10/13' }}>
           
           {cameraError ? (
              <div className="flex flex-col items-center justify-center h-full text-[#d0d0d0] p-2 text-center gap-2">

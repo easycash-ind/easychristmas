@@ -209,7 +209,7 @@ const App: React.FC = () => {
 
           {/* CENTER TITLE - Ethereal Silver Script */}
           {/* Layer: z-0. Adjusted sizes for 9:20 aspect ratio consistency */}
-          <div className={`absolute top-[2%] left-0 w-full flex justify-center pointer-events-none z-0 transition-opacity duration-700 ${isSignatureOpen ? 'opacity-0' : 'opacity-100'}`}>
+          <div className={`absolute top-[1%] left-0 w-full flex justify-center pointer-events-none z-0 transition-opacity duration-700 ${isSignatureOpen ? 'opacity-0' : 'opacity-100'}`}>
             <h1 
                 className={`${devConfig.titleFont} text-6xl md:text-7xl text-center leading-[1] py-10`}
                 style={{
@@ -306,17 +306,7 @@ const App: React.FC = () => {
           {/* Force vertical column on both mobile and PC since PC is now narrow frame */}
           <div className={`absolute top-6 right-6 z-30 pointer-events-auto flex flex-col items-end gap-4 transition-opacity duration-500 ${isSignatureOpen || isProcessing ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
               
-              {/* 0. Developer Mode Toggle (Launch/Close) */}
-              <button 
-                onClick={() => setShowDevPanel(prev => !prev)}
-                className={`${iconButtonClass} ${showDevPanel ? 'text-white border-white/60 bg-white/10' : 'text-slate-300'}`}
-                title={showDevPanel ? "关闭开发者模式" : "启动开发者模式"}
-              >
-                  {/* SOLID Wrench/Screwdriver Icon */}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-                    <path fillRule="evenodd" d="M12 2.25a.75.75 0 01.75.75v.54l1.838-.46a9.75 9.75 0 016.725 7.38l.108.537a.75.75 0 01-.829.89h-4.59a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h2.474a.75.75 0 01.75.75v1.118a.75.75 0 01-.75.75h-.84a.75.75 0 00-.75.75v1.118a.75.75 0 00.75.75h2.218a.75.75 0 01.749.888l-.062.304a9.753 9.753 0 01-5.922 7.17.75.75 0 01-.796-1.212l.349-.234a.75.75 0 00.33-.64v-1.25a.75.75 0 00-.75-.75h-1.107a.75.75 0 01-.75-.75V19.5a.75.75 0 01.75-.75h1.107a.75.75 0 00.75-.75v-1.25a.75.75 0 00-.75-.75h-1.107a.75.75 0 01-.75-.75v-1.25a.75.75 0 01.75-.75h1.107a.75.75 0 00.75-.75v-1.275l-.106-.526a.75.75 0 00-1.471.296v1.504a.75.75 0 01-.75.75h-2.474a.75.75 0 01-.75-.75V10.5a.75.75 0 01.75-.75h4.59a.75.75 0 00.75-.75v-1.25a.75.75 0 00-.75-.75h-2.218a.75.75 0 01-.75-.75V5.5a.75.75 0 01.75-.75h.84a.75.75 0 00.75-.75V2.999a.75.75 0 00-.75-.75h-1.338zM4.5 4.5a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h1.107a.75.75 0 01.75.75v1.25a.75.75 0 01-.75.75h-1.107a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h1.107a.75.75 0 01.75.75v1.25a.75.75 0 01-.75.75h-1.107a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h1.107a.75.75 0 01.75.75V19.5a.75.75 0 01-.75.75h-1.107a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h2.218a.75.75 0 01.75.75v1.118a.75.75 0 01-.75.75h-.84a.75.75 0 00-.75.75v1.118a.75.75 0 00.75.75h2.474a.75.75 0 01.75.75v1.25a.75.75 0 01-.75.75h-4.59a.75.75 0 00-.75.75v1.25a.75.75 0 00.75.75h1.838a9.753 9.753 0 01-6.725-7.38L2.25 13.5a.75.75 0 01.829-.89h4.59a.75.75 0 00.75-.75v-1.25a.75.75 0 00-.75-.75H5.195a.75.75 0 01-.75-.75V8.992a.75.75 0 01.75-.75h.84a.75.75 0 00.75-.75V6.374a.75.75 0 00-.75-.75H3.067a.75.75 0 01-.749-.888l.062-.304A9.753 9.753 0 018.302 2.25H4.5z" clipRule="evenodd" />
-                  </svg>
-              </button>
+              {/* 0. Developer Mode Toggle (Launch/Close) - Hidden */}
 
               {/* 1. Camera Toggle */}
               <button 
