@@ -695,10 +695,62 @@ const Ornaments: React.FC<OrnamentsProps> = ({ mixFactor, type, count, colors, s
       return null;
   }, [type, signatureText]);
 
-  // Default signature textures (one per default polaroid text). Generated once for performance.
-  const defaultSignatureTextures = useMemo(() => {
-      if (type !== 'PHOTO') return [];
-      return DEFAULT_POLAROID_TEXTS.map(t => generateSignatureTexture(t));
+  // Default signature textures (one per default polaroid text).
+  // Generate after fonts are ready to ensure canvas uses the correct @font-face on GitHub Pages.
+  const [defaultSignatureTextures, setDefaultSignatureTextures] = useState<THREE.Texture[]>([]);
+
+  useEffect(() => {
+      if (type !== 'PHOTO') return;
+      let isMounted = true;
+
+      const generateAll = () => {
+          const texs = DEFAULT_POLAROID_TEXTS.map(t => generateSignatureTexture(t));
+          if (!isMounted) {
+              // dispose if created but component unmounted
+              texs.forEach(tx => { if (tx) tx.dispose?.(); });
+              return;
+          }
+          setDefaultSignatureTextures(texs);
+      };
+
+      // If the page has the FontFace API, attempt to ensure the Chinese font is loaded from the correct base path
+      const maybeEnsureFonts = async () => {
+          try {
+              // If Chinese is already available, just generate
+              if (typeof document !== 'undefined' && (document as any).fonts && (document as any).fonts.check && (document as any).fonts.check('12px Chinese')) {
+                  generateAll();
+                  return;
+              }
+
+              // Compute base url from Vite env if available
+              const baseUrl = (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.BASE_URL) ? (import.meta as any).env.BASE_URL : './';
+              const fontUrl = `${baseUrl}fonts/Chinese.ttf`;
+
+              if ((window as any).FontFace) {
+                  const fontFace = new (window as any).FontFace('Chinese', `url(${fontUrl}) format('truetype')`);
+                  const loaded = await fontFace.load();
+                  (document as any).fonts.add(loaded);
+              } else if ((document as any).fonts && (document as any).fonts.ready) {
+                  await (document as any).fonts.ready;
+              }
+
+              generateAll();
+          } catch (e) {
+              // Fallback: generate anyway
+              generateAll();
+          }
+      };
+
+      maybeEnsureFonts();
+
+      return () => {
+          isMounted = false;
+          // cleanup textures
+          setDefaultSignatureTextures(prev => {
+              prev.forEach(tx => { if (tx) tx.dispose?.(); });
+              return [];
+          });
+      };
   }, [type]);
 
   // Generate specific geometry based on type

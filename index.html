@@ -27,19 +27,10 @@
       .font-festive { font-family: 'Mountains of Christmas', cursive; }
       .font-chinese { font-family: 'Chinese', serif; }
       
-      /* Local Chinese font - place Chinese.ttf into public/fonts/Chinese.ttf */
-      @font-face {
-        font-family: 'Chinese';
-        src: url('/fonts/Chinese.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-      
       /* Local Damion font - place Damion-Regular.ttf into public/fonts/Damion-Regular.ttf */
       @font-face {
         font-family: 'Damion';
-        src: url('/fonts/Damion-Regular.ttf') format('truetype');
+        src: url('%BASE_URL%fonts/Damion-Regular.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -48,13 +39,15 @@
       /* Local Chinese font - place Chinese.ttf into public/fonts/Chinese.ttf */
       @font-face {
         font-family: 'Chinese';
-        src: url('/fonts/Chinese.ttf') format('truetype');
+        src: url('%BASE_URL%fonts/Chinese.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
       }
-      .font-chinese { font-family: 'Chinese', serif; }
     </style>
+    <!-- Preload local fonts to improve reliability on first paint (use Vite BASE_URL) -->
+    <link rel="preload" href="%BASE_URL%fonts/Damion-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="%BASE_URL%fonts/Chinese.ttf" as="font" type="font/ttf" crossorigin>
 </head>
   <body>
     <div id="root"></div>
